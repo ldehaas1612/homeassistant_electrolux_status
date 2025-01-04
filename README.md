@@ -99,3 +99,4 @@ This list is non-exhaustive and your appliance may work even if not present here
 | ELECTROLUX | EOD6P77WZ | SteamBake 600 |
 | ELECTROLUX | KODDP77WX | SteamBake 600 |
 | AEG | BPE558370M | SteamBake 6000 |
+| AEG | BBS6402B | SteamBake 7000 |
