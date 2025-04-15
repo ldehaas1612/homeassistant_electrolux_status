@@ -61,13 +61,14 @@ This list is non-exhaustive and your appliance may work even if not present here
 
 **Dishwasher**
 
-| Manufacturer | Model     | Description    |
-| :----------- | :-------- | :------------- |
-| ELECTROLUX   | EEM69410W | MaxiFlex 700   |
-| ELECTROLUX   | EEM69410W | GlassCare 700  |
-| ELECTROLUX   | KEGB9300W | GlassCare 700  |
-| ELECTROLUX   | EEG69410W | GlassCare 700  |
-| AEG          | FSE76738P | 7000 GlassCare |
+| Manufacturer | Model      | Description    |
+| :----------- | :--------- | :------------- |
+| ELECTROLUX   | EEM69410W  | MaxiFlex 700   |
+| ELECTROLUX   | EEM69410W  | GlassCare 700  |
+| ELECTROLUX   | KEGB9300W  | GlassCare 700  |
+| ELECTROLUX   | EEG69410W  | GlassCare 700  |
+| ELECTROLUX   | TWSL6IE301 | N/A            |
+| AEG          | FSE76738P  | 7000 GlassCare |
 
 **Dryer**
 
@@ -88,12 +89,13 @@ This list is non-exhaustive and your appliance may work even if not present here
 | ELECTROLUX   | EWF9042R7WB | Ultimatecare Series 700                 |
 | ELECTROLUX   | EW8F8669Q8  | PerfectCare 800                         |
 | ELECTROLUX   | EW9F149SP   | PerfectCare 900                         |
+| ELECTROLUX   | WASL6IE300  | N/A                                     |
 | AEG          | L6FBG841CA  | 6000 Series Autodose                    |
 | AEG          | L7FENQ96    | 7000 Series ProSteam Autodose           |
 | AEG          | L7FBE941Q   | 7000 Series Prosense Autodose           |
 | AEG          | L8FEC96QS   | 8000 Series Ökomix Autodose             |
 | AEG          | L9WBA61BC   | 9000 Series ÖKOKombi DualSense SensiDry |
-| AEG          | LR9W75490.  | 9000 Series AbsoluteCare                |
+| AEG          | LR9W75490   | 9000 Series AbsoluteCare                |
 | AEG          | L9WBA61BC   | 9000 Series ÖKOKombi DualSense SensiDry |
 
 **Washer / Dryer Combo**
