@@ -72,6 +72,8 @@ class ElectroluxNumber(ElectroluxEntity, NumberEntity):
         """Return the max value."""
         if self.unit == UnitOfTime.SECONDS:
             return time_seconds_to_minutes(self.capability.get("max", 100))
+        if self.unit == UnitOfTemperature.CELSIUS:
+            return self.capability.get("max", 300)
         return self.capability.get("max", 100)
 
     @property
@@ -86,6 +88,8 @@ class ElectroluxNumber(ElectroluxEntity, NumberEntity):
         """Return the max value."""
         if self.unit == UnitOfTime.SECONDS:
             return time_seconds_to_minutes(self.capability.get("step", 1))
+        if self.unit == UnitOfTemperature.CELSIUS:
+            return self.capability.get("max", 5)
         return self.capability.get("step", 1)
 
     async def async_set_native_value(self, value: float) -> None:
@@ -94,7 +98,15 @@ class ElectroluxNumber(ElectroluxEntity, NumberEntity):
             value = time_minutes_to_seconds(value)
         client: OneAppApi = self.api
         if self.entity_source:
-            command = {self.entity_source: {self.entity_attr: value}}
+            if self.entity_source == "userSelections":
+                command = {
+                    self.entity_source: {
+                        "programUID": self.appliance_status["properties"]['reported']["userSelections"]['programUID'],
+                        self.entity_attr: value
+                    },
+                }
+            else:
+                command = {self.entity_source: {self.entity_attr: value}}
         else:
             command = {self.entity_attr: value}
         _LOGGER.debug("Electrolux set value %s", command)
