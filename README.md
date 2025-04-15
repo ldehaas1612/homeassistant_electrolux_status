@@ -94,6 +94,7 @@ This list is non-exhaustive and your appliance may work even if not present here
 | AEG          | L8FEC96QS   | 8000 Series Ökomix Autodose             |
 | AEG          | L9WBA61BC   | 9000 Series ÖKOKombi DualSense SensiDry |
 | AEG          | LR9W75490.  | 9000 Series AbsoluteCare                |
+| AEG          | L9WBA61BC   | 9000 Series ÖKOKombi DualSense SensiDry |
 
 **Washer / Dryer Combo**
 
