@@ -32,7 +32,7 @@
                     "notifications": "Ειδοποιήσεις",
                     "notifications_diagnostic": "Διαγνωστικά",
                     "notifications_warning": "Προειδοποιήσεις",
-                    "password": "Κωδικος",
+                    "password": "Κωδικός",
                     "renew_interval": "Διάστημα ανανέωσης του websocket (δευτερόλεπτα)"
                 }
             }
