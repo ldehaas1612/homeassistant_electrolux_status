@@ -30,6 +30,7 @@ CONF_NOTIFICATION_WARNING = "notifications_warning"
 
 # Defaults
 DEFAULT_LANGUAGE = "English"
+DEFAULT_COUNTRY_CODE = "us"
 DEFAULT_WEBSOCKET_RENEWAL_DELAY = 43200  # 12 hours
 
 # these are attributes that appear in the state file but not in the capabilities.
