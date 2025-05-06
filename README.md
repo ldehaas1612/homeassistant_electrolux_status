@@ -104,6 +104,7 @@ This list is non-exhaustive and your appliance may work even if not present here
 | Manufacturer | Model     | Description                    |
 | :----------- | :-------- | :----------------------------- |
 | ELECTROLUX   | EW9W161BC | PerfectCare 900 Washer & Dryer |
+| AEG   | LWR9W80600 | 9000 Series AbsoluteCare |
 
 **Oven**
 
