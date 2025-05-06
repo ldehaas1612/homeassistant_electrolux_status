@@ -72,14 +72,15 @@ This list is non-exhaustive and your appliance may work even if not present here
 
 **Dryer**
 
-| Manufacturer | Model      | Description      |
-| :----------- | :--------- | :--------------- |
-| ELECTROLUX   | EDH803BEWA | UltimateCare 800 |
-| ELECTROLUX   | EW9H283BY  | PerfectCare 900  |
-| ELECTROLUX   | EW9H869E9  | PerfectCare 900  |
-| ELECTROLUX   | EW9H869E9  | PerfectCare 900  |
-| ELECTROLUX   | EW9H188SPC | PerfectCare 900  |
-| ELECTROLUX   | YH7W979P9  | Airdryer         |
+| Manufacturer | Model      | Description              |
+| :----------- | :--------- | :----------------------- |
+| ELECTROLUX   | EDH803BEWA | UltimateCare 800         |
+| ELECTROLUX   | EW9H283BY  | PerfectCare 900          |
+| ELECTROLUX   | EW9H869E9  | PerfectCare 900          |
+| ELECTROLUX   | EW9H869E9  | PerfectCare 900          |
+| ELECTROLUX   | EW9H188SPC | PerfectCare 900          |
+| ELECTROLUX   | YH7W979P9  | Airdryer                 |
+| AEG          | TR9DWP1699 | 9000 Series AbsoluteCare |
 
 **Washing Machine**
 
