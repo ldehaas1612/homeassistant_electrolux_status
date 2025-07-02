@@ -214,16 +214,6 @@ class ElectroluxCoordinator(DataUpdateCoordinator):
             appliance_id,
         )
         appliances: Appliances = self.data.get("appliances", None)
-        # Should not happen : wonder if this is not the cause of infinite loop of integrations creations => disabled
-        # if appliances is None or len(appliances.get_appliances()) == 0:
-        #     await self.setup_entities()
-        #     appliances = self.data.get('appliances', None)
-
-        # O loop abaixo foi comentado por ser desnecessário. A lógica interna já utiliza
-        # o 'appliance_id' correto que a função recebe, tornando o loop redundante.
-        # for local_appliance_id in appliances.get_appliances():
-        #     if local_appliance_id != appliance_id:
-        #         pass
         try:
             appliance: Appliance = appliances.get_appliance(appliance_id)
             if appliance:
