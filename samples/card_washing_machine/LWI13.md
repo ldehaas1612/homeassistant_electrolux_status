@@ -9,13 +9,13 @@ Testado na **Electrolux LWI13**!
 
 | Modo Escuro | Modo Claro |
 |:-----------:|:----------:|
-| ![card_dark](https://github.com/user-attachments/assets/89fa40c1-6923-46d2-bccd-233b261acf37) | ![card_light](https://github.com/user-attachments/assets/2ae99532-b6ca-4568-88ec-6af9b0c628d7) |
+| ![card_dark](https://github.com/user-attachments/assets/571ff9dd-be85-41c1-92c9-e9c8a5f512ff) | ![card_light](https://github.com/user-attachments/assets/1fd1c4fc-daea-4013-b570-d6644c4b5a80) |
 
 ### Bubble
 
 | Modo Escuro | Modo Claro |
 |:-----------:|:----------:|
-| ![bubble_dark](https://github.com/user-attachments/assets/038b5a33-0d08-4e06-b676-d0282e5c2070) | ![bubble_light](https://github.com/user-attachments/assets/1a09567c-d662-4681-8520-e34d020de11d) |
+| ![bubble_dark](https://github.com/user-attachments/assets/2cc4d4c6-0319-4955-9f56-e9131b4d01bd) | ![bubble_light](https://github.com/user-attachments/assets/421b0711-73e6-4008-ae75-8bd9726458cf) |
 
 ## 🧩 Integrações HACS
 
