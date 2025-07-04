@@ -1,4 +1,4 @@
-"""electrolux status integration."""
+"""Electrolux status integration."""
 
 import asyncio
 import aiofiles
@@ -214,22 +214,15 @@ class ElectroluxCoordinator(DataUpdateCoordinator):
             appliance_id,
         )
         appliances: Appliances = self.data.get("appliances", None)
-        # Should not happen : wonder if this is not the cause of infinite loop of integrations creations => disabled
-        # if appliances is None or len(appliances.get_appliances()) == 0:
-        #     await self.setup_entities()
-        #     appliances = self.data.get('appliances', None)
-
-        for local_appliance_id in appliances.get_appliances():
-            if local_appliance_id != appliance_id:
-                pass
-            try:
-                appliance: Appliance = appliances.get_appliances().get(appliance_id)
+        try:
+            appliance: Appliance = appliances.get_appliance(appliance_id)
+            if appliance:
                 appliance_status = await self.api.get_appliance_state(appliance_id)
                 appliance.update(appliance_status)
                 self.async_set_updated_data(self.data)
-            except Exception as exception:
-                _LOGGER.exception(exception)  # noqa: TRY401
-                raise UpdateFailed from exception
+        except Exception as exception:
+            _LOGGER.exception(exception)  # noqa: TRY401
+            raise UpdateFailed from exception
 
     def incoming_data(self, data: dict[str, dict[str, Any]]):
         """Process incoming data."""

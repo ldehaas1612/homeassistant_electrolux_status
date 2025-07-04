@@ -157,9 +157,7 @@ class ElectroluxEntity(CoordinatorEntity):
     def name(self) -> str:
         """Return the name of the sensor."""
         if self.catalog_entry and self.catalog_entry.friendly_name:
-            return (
-                f"{self.get_appliance.name} {self.catalog_entry.friendly_name.lower()}"
-            )
+            return self.catalog_entry.friendly_name.capitalize()
         return self._name
 
     @property
@@ -180,7 +178,7 @@ class ElectroluxEntity(CoordinatorEntity):
     def device_info(self):
         """Return identifiers of the device."""
         return {
-            "identifiers": {(DOMAIN, self.get_appliance.name)},
+            "identifiers": {(DOMAIN, self.pnc_id)},
             "name": self.get_appliance.name,
             "model": self.get_appliance.model,
             "manufacturer": self.get_appliance.brand,
