@@ -1,8 +1,21 @@
-
 # 🧼💡 Lavadora Electrolux LWI13 no Home Assistant
 
 Central de automações, scripts, cards, dicas e um patchzinho maroto pra integração custom.  
-Testado com a **Electrolux LWI13**!
+Testado na **Electrolux LWI13**!
+
+## 🖼️ Exemplos de Interface
+
+### Card
+
+| Modo Escuro | Modo Claro |
+|:-----------:|:----------:|
+| ![card_dark](https://github.com/user-attachments/assets/571ff9dd-be85-41c1-92c9-e9c8a5f512ff) | ![card_light](https://github.com/user-attachments/assets/1fd1c4fc-daea-4013-b570-d6644c4b5a80) |
+
+### Bubble
+
+| Modo Escuro | Modo Claro |
+|:-----------:|:----------:|
+| ![bubble_dark](https://github.com/user-attachments/assets/2cc4d4c6-0319-4955-9f56-e9131b4d01bd) | ![bubble_light](https://github.com/user-attachments/assets/421b0711-73e6-4008-ae75-8bd9726458cf) |
 
 ## 🧩 Integrações HACS
 
@@ -36,6 +49,8 @@ primary: |-
     {% else %}
       {{ status_text }}: {{ minutes }}m restantes
     {% endif %}
+  {% elif state == 'Ready To Start' %}
+    Iniciando
   {% elif state == 'End of Cycle' %}
     Finalizado
   {% else %}
@@ -76,9 +91,7 @@ secondary: >-
   {% endif %}
 icon: |-
   {% set state = states('sensor.electrolux_lavadora_appliancestate') %}
-  {% if state == 'Running' %}
-    hue:room-laundry
-  {% elif state == 'Idle' or state == 'OFF' %}
+  {% if state == 'Idle' or state == 'OFF' %}
     hue:room-laundry-off
   {% else %}
     hue:room-laundry
@@ -87,6 +100,8 @@ icon_color: |-
   {% set state = states('sensor.electrolux_lavadora_appliancestate') %}
   {% if state == 'Running' %}
     blue
+  {% elif state == 'Ready To Start' %}
+    green
   {% elif state == 'Paused' %}
     orange
   {% elif state == 'End of Cycle' %}
@@ -95,13 +110,13 @@ icon_color: |-
     disabled
   {% endif %}
 badge_icon: |-
-  {% if is_state('sensor.electrolux_lavadora_connectivitystate', 'Connected') %}
-    mdi:wifi
+  {% if is_state('sensor.electrolux_lavadora_remotecontrol', 'Enabled') %}
+    mdi:remote
   {% else %}
-    mdi:wifi-off
+    mdi:remote-off
   {% endif %}
 badge_color: |-
-  {% if is_state('sensor.electrolux_lavadora_connectivitystate', 'Connected') %}
+  {% if is_state('sensor.electrolux_lavadora_remotecontrol', 'Enabled') %}
     green
   {% else %}
     red
@@ -155,8 +170,6 @@ cards:
   - type: custom:bubble-card
     card_type: pop-up
     hash: "#lavadora"
-    name: ""
-    icon: ""
     show_header: false
     show_state: false
     show_name: false
@@ -186,6 +199,8 @@ cards:
         {% else %}
           {{ status_text }}: {{ minutes }}m restantes
         {% endif %}
+      {% elif state == 'Ready To Start' %}
+        Iniciando
       {% elif state == 'End of Cycle' %}
         Finalizado
       {% else %}
@@ -193,7 +208,8 @@ cards:
       {% endif %}
     secondary: >-
       {% set state = states('sensor.electrolux_lavadora_appliancestate') %} {%
-      if state == 'Idle' or state == 'OFF' %}
+      if state == 'Idle' or state == 'OFF' or state == 'Running' or state ==
+      'Paused' or state == 'Ready To Start' %}
         {% set program_id = states('number.electrolux_lavadora_latamuserselections_programid') %}
         {% set PGM_MAP = {
           '10': 'Normal',
@@ -222,11 +238,19 @@ cards:
         {% set nome_nivel = NIVEL_MAP[nivel_id] | default('N/D') %}
         {{ nome_programa }} | {{ nome_nivel }}
       {% endif %}
-    icon: hue:room-laundry
+    icon: |-
+      {% set state = states('sensor.electrolux_lavadora_appliancestate') %}
+      {% if state == 'Idle' or state == 'OFF' %}
+        hue:room-laundry-off
+      {% else %}
+        hue:room-laundry
+      {% endif %}
     icon_color: |-
       {% set state = states('sensor.electrolux_lavadora_appliancestate') %}
       {% if state == 'Running' %}
         blue
+      {% elif state == 'Ready To Start' %}
+        green
       {% elif state == 'Paused' %}
         orange
       {% elif state == 'End of Cycle' %}
@@ -243,43 +267,103 @@ cards:
       action: none
   - type: custom:gap-card
     height: 15
-  - type: heading
-    heading: Configurações de Lavagem
-    heading_style: title
+  - type: custom:bubble-card
+    card_type: separator
+    name: Configs. Lavagem
     icon: mdi:water-sync
-    card_mod:
-      style: |-
-        ha-icon {
-          --mdc-icon-size: 30px;
-        }
-  - type: custom:mushroom-select-card
+    styles: |-
+      ha-icon {
+        --mdc-icon-size: 30px;
+      }
+      .bubble-icon {
+        color: grey;
+      }
+      .bubble-name {
+        font-weight: 400;
+      }
+      .bubble-line {
+        opacity: 0;
+      }
+  - type: custom:bubble-card
+    card_type: select
     entity: input_select.programa_da_lavadora
-    name: Programa
-    secondary_info: none
-  - type: custom:mushroom-select-card
+    name: Programas
+    show_icon: true
+    show_state: true
+    styles: |-
+      ha-card {
+        --bubble-select-icon-background-color: none !important;
+        --bubble-main-background-color: var(--card-background-color) !important;
+        --bubble-icon-background-color: var(--secondary-background-color) !important;
+        --bubble-select-border-radius: 12px !important;
+        --bubble-select-list-border-radius: 10px !important;
+        #--bubble-select-button-border-radius: 10px !important;
+        #--bubble-select-icon-border-radius: 2 !important;
+        --bubble-select-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1) !important;
+      }
+      .bubble-icon {
+        --mdc-icon-size: 25px !important;
+        color: rgba(33, 150, 243) !important;
+      }
+      .bubble-icon-container {
+        justify-content: left;
+      }
+      .bubble-dropdown-inner-border {
+        border-radius: 12px !important;
+      }
+  - type: custom:bubble-card
+    card_type: select
     entity: input_select.nivel_de_agua_da_lavadora
-    name: Nível da Água
-    secondary_info: none
-  - type: custom:gap-card
-    height: 15
-  - type: heading
-    heading: Opções Adicionais
-    heading_style: title
+    name: Nível de Água
+    show_icon: true
+    show_state: true
+    styles: |-
+      ha-card {
+        --bubble-select-icon-background-color: none !important;
+        --bubble-main-background-color: var(--card-background-color) !important;
+        --bubble-icon-background-color: var(--secondary-background-color) !important;
+        --bubble-select-border-radius: 12px !important;
+        --bubble-select-list-border-radius: 10px !important;
+        #--bubble-select-button-border-radius: 10px !important;
+        #--bubble-select-icon-border-radius: 2 !important;
+        --bubble-select-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1) !important;
+      }
+      .bubble-icon {
+        --mdc-icon-size: 25px !important;
+        color: rgba(33, 150, 243) !important;
+      }
+      .bubble-icon-container {
+        justify-content: left;
+      }
+      .bubble-dropdown-inner-border {
+        border-radius: 12px !important;
+      }
+  - type: custom:bubble-card
+    card_type: separator
+    name: Opções Adicionais
     icon: mdi:playlist-plus
-    card_mod:
-      style: |-
-        ha-icon {
-          --mdc-icon-size: 30px;
-        }
+    rows: "1"
+    styles: |-
+      ha-icon {
+        --mdc-icon-size: 30px;
+      }
+      .bubble-icon {
+        color: grey;
+      }
+      .bubble-name {
+        font-weight: 400;
+      }
+      .bubble-line {
+        opacity: 0;
+      }
   - type: custom:mushroom-chips-card
-    alignment: center
     chips:
       - type: template
         icon: mdi:water-plus
         icon_color: >-
           {{ 'blue' if is_state('input_boolean.lavadora_enxague_extra', 'on')
           else 'disabled' }}
-        content: Enxáque Extra
+        content: Enxágue Extra
         tap_action:
           action: toggle
         entity: input_boolean.lavadora_enxague_extra
@@ -301,24 +385,33 @@ cards:
         tap_action:
           action: toggle
         entity: input_boolean.lavadora_turbo_centrifugacao
+    alignment: center
     card_mod:
       style: |-
         ha-card {
           --chip-height: 42px;
           --chip-padding: 0 12px;
           --chip-font-size: 14px;
+          --chip-border-radius: 8px;
         }
-  - type: custom:gap-card
-    height: 15
-  - type: heading
-    heading: Comandos
-    heading_style: title
+  - type: custom:bubble-card
+    card_type: separator
+    name: Comandos
     icon: mdi:remote
-    card_mod:
-      style: |-
-        ha-icon {
-          --mdc-icon-size: 30px;
-        }
+    rows: "1"
+    styles: |-
+      ha-icon {
+        --mdc-icon-size: 30px;
+      }
+      .bubble-icon {
+        color: grey;
+      }
+      .bubble-name {
+        font-weight: 400;
+      }
+      .bubble-line {
+        opacity: 0;
+      }
   - type: grid
     columns: 2
     square: false
@@ -381,6 +474,7 @@ cards:
           service: script.turn_on
           target:
             entity_id: script.lavadora_avancar_etapa
+  - type: custom:gap-card
 ```
 
 - **Chips interativos:**  
