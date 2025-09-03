@@ -1,41 +1,41 @@
-# 🧼💡 Lavadora Electrolux LWI13 no Home Assistant
+# 🧼💡 Electrolux LWI13 Washing Machine in Home Assistant
 
-Central de automações, scripts, cards, dicas e um patchzinho maroto pra integração custom.  
-Testado na **Electrolux LWI13**!
+Automation hub, scripts, cards, tips, and a handy little patch for the custom integration.  
+Tested on the **Electrolux LWI13**!
 
-## 🖼️ Exemplos de Interface
+## 🖼️ Interface Examples
 
 ### Card
 
-| Modo Escuro | Modo Claro |
-|:-----------:|:----------:|
+| Dark Mode | Light Mode |
+|:---------:|:----------:|
 | ![card_dark](https://github.com/user-attachments/assets/571ff9dd-be85-41c1-92c9-e9c8a5f512ff) | ![card_light](https://github.com/user-attachments/assets/1fd1c4fc-daea-4013-b570-d6644c4b5a80) |
 
 ### Bubble
 
-| Modo Escuro | Modo Claro |
-|:-----------:|:----------:|
+| Dark Mode | Light Mode |
+|:---------:|:----------:|
 | ![bubble_dark](https://github.com/user-attachments/assets/2cc4d4c6-0319-4955-9f56-e9131b4d01bd) | ![bubble_light](https://github.com/user-attachments/assets/421b0711-73e6-4008-ae75-8bd9726458cf) |
 
-## 🧩 Integrações HACS
+## 🧩 HACS Integrations
 
-> **Pré-requisito:** Instale o [**HACS**](https://hacs.xyz/)  
-> Se ainda não tem, não tem nem graça mexer com HA.
+> **Prerequisite:** Install [**HACS**](https://hacs.xyz/)  
+> If you don’t have it yet, there’s no fun messing with HA.
 
 - [Electrolux Status](https://github.com/albaintor/homeassistant_electrolux_status)
 - [Mushroom](https://github.com/piitaya/lovelace-mushroom)
 - [Bubble Card](https://github.com/Clooos/Bubble-Card)
 - [Card-mod](https://github.com/thomasloven/lovelace-card-mod)
 
-## 🃏 Cards – Painel Visual
+## 🃏 Cards – Visual Panel
 
-### Card Principal – Mushroom
+### Main Card – Mushroom
 
-Mostra status, tempo restante e programa ativo, já trocando cor/ícone conforme o estado!  
-*Toque simples* navega, *segurar* executa ação inteligente.
+Shows status, remaining time, and active program, already changing color/icon based on state!  
+*Single tap* navigates, *hold* runs a smart action.
 
 ```yaml
-# Card principal usando mushroom-template-card (custom:mushroom-template-card)
+# Main card using mushroom-template-card (custom:mushroom-template-card)
 type: custom:mushroom-template-card
 primary: |-
   {% set state = states('sensor.electrolux_lavadora_appliancestate') %}
@@ -157,12 +157,12 @@ card_mod:
       }
 ```
 
-> 🎨 Dá pra personalizar cor, animação, badge, texto… solta a criatividade!
+> 🎨 You can customize color, animation, badge, text… let your creativity flow!
 
-### 💦 Bubble Card – Opções & Comandos
+### 💦 Bubble Card – Options & Commands
 
-Tudo fácil de clicar, alternar, ligar, pausar, avançar etapa.  
-Botões extras pra Enxágue, Turbo, e outros 💪.
+Everything is easy to click, toggle, start, pause, or skip step.  
+Extra buttons for Rinse, Turbo, and more 💪.
 
 ```yaml
 type: vertical-stack
@@ -477,24 +477,25 @@ cards:
   - type: custom:gap-card
 ```
 
-- **Chips interativos:**  
-  - 💧 Enxágue Extra  
-  - 🌀 Turbo Agitação  
-  - 🏁 Turbo Centrifugação  
-- **Comandos rápidos:**  
-  - ▶️ Iniciar  
-  - ⏸️ Pausar  
-  - ⏭️ Avançar Etapa  
-  - ⏹️ Desligar
+- **Interactive chips:**  
+  - 💧 Extra Rinse  
+  - 🌀 Turbo Agitation  
+  - 🏁 Turbo Spin  
 
-> **Dica:** Segura nos botões pra ações diferentes!  
-> Modular, pode customizar à vontade.
+- **Quick commands:**  
+  - ▶️ Start  
+  - ⏸️ Pause  
+  - ⏭️ Skip Step  
+  - ⏹️ Turn Off  
 
-## ⚡ Automações
+> **Tip:** Hold down buttons for different actions!  
+> Modular – customize as you like.
 
-### Controle Central (Programa/Nível d’Água)
+## ⚡ Automations
 
-Ajusta programa e nível só trocando o select!
+### Central Control (Program/Water Level)
+
+Adjusts program and water level just by changing the select!
 
 ```yaml
 alias: "Lavadora: Controle Central"
@@ -531,15 +532,15 @@ actions:
 mode: single
 ```
 
-### Extras (Ligar/Desligar Opções)
+### Extras (Turn Options On/Off)
 
-Tudo separado pra não dar rolo, ativa/desativa via booleanos:
+Each one separate to avoid conflicts, toggled via booleans:
 
-- **Enxágue Extra**
-- **Turbo Agitação**
-- **Turbo Centrifugação**
+- **Extra Rinse**
+- **Turbo Agitation**
+- **Turbo Spin**
 
-### Enxágue Extra
+#### Extra Rinse
 
 ```yaml
 alias: "Lavadora: Controle Enxágue Extra"
@@ -557,7 +558,7 @@ actions:
 mode: single
 ```
 
-### Turbo Agitação
+#### Turbo Agitation
 
 ```yaml
 alias: "Lavadora: Controle Turbo Agitação"
@@ -576,7 +577,7 @@ actions:
 mode: single
 ```
 
-### Turbo Centrifugação
+#### Turbo Spin
 
 ```yaml
 alias: "Lavadora: Controle Turbo Centrifugação"
@@ -595,13 +596,13 @@ actions:
 mode: single
 ```
 
-## 🤖 Scripts Rápidos
+## 🤖 Quick Scripts
 
-- **Ação Inteligente:** Liga, pausa ou inicia dependendo do estado.
-- **Avançar Etapa:** Dá aquele pulo na etapa atual.
-- **Desligar:** Força a máquina a desligar, sem dó.
+- **Smart Action:** Starts, pauses, or resumes depending on state.  
+- **Skip Step:** Jumps ahead in the current step.  
+- **Turn Off:** Forces the machine to shut down.  
 
-### Ação Inteligente
+### Smart Action
 
 ```yaml
 alias: "Lavadora: Ação Inteligente"
@@ -641,7 +642,7 @@ icon: mdi:play-box-multiple
 description: ""
 ```
 
-### Avançar Etapa
+### Skip Step
 
 ```yaml
 alias: "Lavadora: Avançar Etapa"
@@ -668,7 +669,7 @@ icon: mdi:skip-next
 description: ""
 ```
 
-### Desligar
+### Turn Off
 
 ```yaml
 alias: "Lavadora: Desligar"
@@ -682,12 +683,12 @@ icon: hue:room-laundry-off
 description: ""
 ```
 
-## 🩹 PATCH – Fix do number.py v2.1.0
+## 🩹 PATCH – Fix for number.py v2.1.0
 
-Corrige o envio do `latamUserSelections`  
-Evita de perder configs quando muda só um valor pelo HA.
+Fixes sending of `latamUserSelections`  
+Prevents losing configs when only changing one value via HA.
 
-### Trecho alterado
+### Changed Section
 
 ```python
 ...
@@ -736,11 +737,11 @@ Evita de perder configs quando muda só um valor pelo HA.
 ...
 ```
 
-> **🛠️ ESSENCIAL:** Sempre refaça esse patch se atualizar o HACS do `electrolux_status`!
+> **🛠️ ESSENTIAL:** Always reapply this patch if you update the `electrolux_status` HACS!
 
-## 🚨 Observações Ninja
+## 🚨 Ninja Notes
 
-- 📝 Documente qualquer ajuste feito nos scripts/cards!
-- 🔄 Patch do `number.py` precisa ser reaplicado quando atualizar a integração!
-- 🎛️ Cards mushroom = playground visual, abuse das configs!
-- ⏱️ Se os scripts atrasarem ou adiantarem, ajusta os delays.
+- 📝 Document any adjustments made in scripts/cards!  
+- 🔄 `number.py` patch must be reapplied whenever the integration is updated!  
+- 🎛️ Mushroom cards = visual playground, go wild with configs!  
+- ⏱️ If scripts run too early or too late, adjust the delays.  
